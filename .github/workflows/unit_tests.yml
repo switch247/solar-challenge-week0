@@ -3,7 +3,7 @@ name: Unit Tests  # Name of the workflow
 on: [push, pull_request]   # 👈 When this workflow is triggered
 
 jobs:
-  build:                    # A job is a group of steps
+  unit-tests:                    # A job is a group of steps
     runs-on: ubuntu-latest  # The virtual machine (OS) GitHub will use
 
     steps:
