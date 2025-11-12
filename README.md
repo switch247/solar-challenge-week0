@@ -181,3 +181,32 @@ If you'd like, I can now:
 - Implement pairwise post-hoc tests (Tukey HSD / Dunn) with corrected p-values.
 - Add a CI workflow to run tests and optionally build a small demo site.
 
+---
+
+## 📸 Dashboard Screenshots
+
+Here are a few screenshots from the interactive dashboard (see `dashboard_screenshots/`):
+
+![Dashboard 1](dashboard_screenshots/dashboard1.png)
+
+![Dashboard 2](dashboard_screenshots/dashboard2.png)
+
+![Dashboard 3](dashboard_screenshots/dashboard3.png)
+
+---
+
+## 🌐 Deployed Demo
+
+The dashboard is deployed and available at:
+
+[https://switch247-solar-challenge-week0-appmain-kxo2fa.streamlit.app/](https://switch247-solar-challenge-week0-appmain-kxo2fa.streamlit.app/)
+
+---
+
+## 🧩 Notes on Data Inputs
+
+- **File upload:** Use the sidebar CSV upload to visualize your own country or site data; uploaded files are merged with the app's defaults for immediate plotting.
+- **Random / sample data generators:** The project includes utilities to generate sample/randomized CSVs so you can demo visualizations and interactive flows without real data.
+
+These input methods make it easy to create reproducible demo videos and to validate visualizations before connecting production datasets.
+
