@@ -67,7 +67,7 @@ The dataset for this challenge is available at the following link:
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
-├── src/
+├── app/
 ├── notebooks/
 │   ├── __init__.py
 │   └── README.md
@@ -113,3 +113,71 @@ pytest
 
 
 ---
+
+## 📺 Streamlit Dashboard — Development & Usage
+
+I built an interactive Streamlit dashboard at `app/main.py` that reproduces the
+cross-country comparisons from the notebooks. Key features:
+
+- Load default cleaned country CSVs from `data/` (Benin, Sierra Leone, Togo).
+- Upload additional country CSVs via the sidebar.
+- Choose which irradiance metric to analyze (GHI, DNI, DHI).
+- Switch between Boxplot and Average Bar views.
+- Filter to daylight-only rows (GHI > 0) for more representative comparisons.
+- View per-country summary stats (mean/median/std) and simple statistical
+    tests (one-way ANOVA and Kruskal–Wallis when SciPy is available).
+- See a "Top months" table (average metric per month × country) and download it as CSV.
+
+Files added/updated for the dashboard:
+
+- `app/main.py` — Streamlit app entry point (interactive UI and visuals).
+- `src/utils.py` — Helpers for merging, cleaning, summary stats and tests.
+- `scripts/start_streamlit.ps1` — Updated to launch `app/main.py`.
+- `scripts/generate_sample_data.py` — Generate demo irradiance CSVs (GHI/DNI/DHI).
+
+How to run the dashboard (PowerShell)
+
+1. Create and activate the virtual environment (if not already active):
+
+```powershell
+python -m venv .venv
+. .\.venv\Scripts\Activate.ps1
+```
+
+2. Install dependencies (first time):
+
+```powershell
+pip install -r requirements.txt
+```
+
+3. Start the Streamlit app (two options):
+
+- Using the provided script:
+
+```powershell
+.\scripts\start_streamlit.ps1
+```
+
+- Or directly:
+
+```powershell
+streamlit run app/main.py --server.port=8501
+```
+
+4. Open http://localhost:8501 in your browser (Streamlit will also print the URL).
+
+Developer notes (design & process)
+
+- I mirrored the analysis in `notebook/compare_countries.ipynb` and encapsulated
+    data logic in `src/utils.py` so unit tests can exercise core functionality
+    without running Streamlit.
+- The app is intentionally thin and focuses on declarative widget wiring and
+    using `src.utils` for computations, filtering and tests.
+- Unit tests live under `tests/`. Run `pytest -q` to run the test suite.
+
+If you'd like, I can now:
+
+- Add more visualizations (monthly timeseries, seasonal decomposition).
+- Implement pairwise post-hoc tests (Tukey HSD / Dunn) with corrected p-values.
+- Add a CI workflow to run tests and optionally build a small demo site.
+
